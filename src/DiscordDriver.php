@@ -156,7 +156,6 @@ class DiscordDriver implements DriverInterface
      */
     public function sendPayload($payload)
     {
-        var_dump($payload);
         return $this->message->channel->sendMessage($payload['message'], false, $payload['embed']);
     }
 
