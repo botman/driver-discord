@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use React\Promise\PromiseInterface;
 use BotMan\BotMan\Messages\Incoming\Answer;
 use BotMan\BotMan\Interfaces\DriverInterface;
-use BotMan\BotMan\Messages\Attachments\Image;;
+use BotMan\BotMan\Messages\Attachments\Image;
 use BotMan\BotMan\Interfaces\DriverEventInterface;
 use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
@@ -51,7 +51,6 @@ class DiscordDriver implements DriverInterface
      */
     public function connected()
     {
-
     }
 
     /**
@@ -126,7 +125,7 @@ class DiscordDriver implements DriverInterface
     {
         $payload = [
             'message' => '',
-            'embed' => ''
+            'embed' => '',
         ];
 
         if ($message instanceof OutgoingMessage) {
@@ -138,8 +137,8 @@ class DiscordDriver implements DriverInterface
                 if ($attachment instanceof Image) {
                     $payload['embed'] = [
                         'image' => [
-                            'url' => $attachment->getUrl()
-                        ]
+                            'url' => $attachment->getUrl(),
+                        ],
                     ];
                 }
             }
@@ -174,7 +173,6 @@ class DiscordDriver implements DriverInterface
      */
     public function types(IncomingMessage $matchingMessage)
     {
-
     }
 
     /**
@@ -193,7 +191,7 @@ class DiscordDriver implements DriverInterface
                 $user->getUsername());
         }
 
-        return new User($this->message->author->id,'', '', $this->message->author->username);
+        return new User($this->message->author->id, '', '', $this->message->author->username);
     }
 
     /**
@@ -214,7 +212,6 @@ class DiscordDriver implements DriverInterface
      */
     public function sendRequest($endpoint, array $parameters, IncomingMessage $matchingMessage)
     {
-
     }
 
     /**
