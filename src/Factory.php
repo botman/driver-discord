@@ -13,7 +13,6 @@ use BotMan\BotMan\Storages\Drivers\FileStorage;
 
 class Factory
 {
-
     /**
      * Create a new BotMan instance.
      *
@@ -31,7 +30,7 @@ class Factory
     ) {
         $client = new Discord([
             'token' => Collection::make($config['discord'])->get('token'),
-            'loop' => $loop
+            'loop' => $loop,
         ]);
 
         return $this->createUsingDiscord($config, $client, $cache, $storageDriver);
@@ -64,14 +63,13 @@ class Factory
         $driver = new DiscordDriver($config, $client);
         $botman = new BotMan($cache, $driver, $config, $storageDriver);
 
-        $client->on('message', function() use ($botman) {
+        $client->on('message', function () use ($botman) {
             $botman->listen();
         });
 
         $client->on('ready', function ($discord) use ($driver) {
             $driver->connected();
         });
-
 
         return $botman;
     }
