@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=7.0",
-        "mpociot/botman": "~2.0",
+        "botman/botman": "~2.0",
         "team-reflex/discord-php": "^4.0"
     },
     "require-dev": {
@@ -37,7 +37,5 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "cs": "php-cs-fixer fix"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

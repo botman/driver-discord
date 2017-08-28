@@ -1,6 +1,6 @@
-# BotMan Slack Driver
+# BotMan Discord Driver
 
-BotMan driver to connect Slack with [BotMan](https://github.com/botman/botman)
+BotMan driver to connect Discord with [BotMan](https://github.com/botman/botman)
 
 ## Contributing
 
