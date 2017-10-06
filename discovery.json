@@ -1,8 +1,8 @@
 {
     "botman/driver-config": [
-        "stubs/slack.php"
+        "stubs/discord.php"
     ],
     "botman/driver": [
-        "BotMan\\Drivers\\Slack\\SlackDriver"
+        "BotMan\\Drivers\\Discord\\DiscordDriver"
     ]
 }
