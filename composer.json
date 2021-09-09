@@ -15,13 +15,13 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "botman/botman": "~2.0",
-        "team-reflex/discord-php": "^4.0"
+        "php": ">=7.4",
+        "botman/botman": "^2.0",
+        "team-reflex/discord-php": "^6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.0",
-        "mockery/mockery": "dev-master",
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.4",
         "ext-curl": "*"
     },
     "autoload": {
