@@ -133,7 +133,7 @@ class DiscordDriver implements DriverInterface
 
             $attachment = $message->getAttachment();
 
-            if (! is_null($attachment)) {
+            if (!is_null($attachment)) {
                 if ($attachment instanceof Image) {
                     $payload['embed'] = [
                         'image' => [
@@ -163,7 +163,7 @@ class DiscordDriver implements DriverInterface
      */
     public function isConfigured()
     {
-        return ! is_null($this->config->get('token'));
+        return !is_null($this->config->get('token'));
     }
 
     /**
@@ -172,6 +172,17 @@ class DiscordDriver implements DriverInterface
      * @return mixed
      */
     public function types(IncomingMessage $matchingMessage)
+    {
+    }
+
+    /**
+     * Send a typing indicator and wait for the given amount of seconds.
+     * @param IncomingMessage $matchingMessage
+     * @param int $seconds
+     * @param float $seconds
+     * @return mixed
+     */
+    public function typesAndWaits(IncomingMessage $matchingMessage, float $seconds)
     {
     }
 
@@ -186,9 +197,13 @@ class DiscordDriver implements DriverInterface
         $this->client->getUserById($matchingMessage->getSender())->then(function ($_user) use (&$user) {
             $user = $_user;
         });
-        if (! is_null($user)) {
-            return new User($matchingMessage->getSender(), $user->getFirstName(), $user->getLastName(),
-                $user->getUsername());
+        if (!is_null($user)) {
+            return new User(
+                $matchingMessage->getSender(),
+                $user->getFirstName(),
+                $user->getLastName(),
+                $user->getUsername()
+            );
         }
 
         return new User($this->message->author->id, '', '', $this->message->author->username);
