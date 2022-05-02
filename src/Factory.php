@@ -2,24 +2,24 @@
 
 namespace BotMan\Drivers\Discord;
 
-use Discord\Discord;
 use BotMan\BotMan\BotMan;
-use Illuminate\Support\Collection;
-use React\EventLoop\LoopInterface;
 use BotMan\BotMan\Cache\ArrayCache;
 use BotMan\BotMan\Interfaces\CacheInterface;
 use BotMan\BotMan\Interfaces\StorageInterface;
 use BotMan\BotMan\Storages\Drivers\FileStorage;
+use Discord\Discord;
+use Illuminate\Support\Collection;
+use React\EventLoop\LoopInterface;
 
 class Factory
 {
     /**
      * Create a new BotMan instance.
      *
-     * @param array $config
-     * @param LoopInterface $loop
-     * @param CacheInterface $cache
-     * @param StorageInterface $storageDriver
+     * @param  array  $config
+     * @param  LoopInterface  $loop
+     * @param  CacheInterface  $cache
+     * @param  StorageInterface  $storageDriver
      * @return \BotMan\BotMan\BotMan
      */
     public function createForDiscord(
@@ -39,11 +39,12 @@ class Factory
     /**
      * Create a new BotMan instance.
      *
-     * @param array $config
-     * @param Discord $client
-     * @param CacheInterface $cache
-     * @param StorageInterface $storageDriver
+     * @param  array  $config
+     * @param  Discord  $client
+     * @param  CacheInterface  $cache
+     * @param  StorageInterface  $storageDriver
      * @return BotMan
+     *
      * @internal param LoopInterface $loop
      */
     public function createUsingDiscord(

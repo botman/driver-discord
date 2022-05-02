@@ -2,18 +2,18 @@
 
 namespace BotMan\Drivers\Discord;
 
-use Discord\Discord;
-use BotMan\BotMan\Users\User;
 use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Interfaces\DriverEventInterface;
+use BotMan\BotMan\Interfaces\DriverInterface;
+use BotMan\BotMan\Messages\Attachments\Image;
+use BotMan\BotMan\Messages\Incoming\Answer;
+use BotMan\BotMan\Messages\Incoming\IncomingMessage;
+use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
+use BotMan\BotMan\Users\User;
+use Discord\Discord;
 use Discord\Parts\Channel\Message;
 use Illuminate\Support\Collection;
 use React\Promise\PromiseInterface;
-use BotMan\BotMan\Messages\Incoming\Answer;
-use BotMan\BotMan\Interfaces\DriverInterface;
-use BotMan\BotMan\Messages\Attachments\Image;
-use BotMan\BotMan\Interfaces\DriverEventInterface;
-use BotMan\BotMan\Messages\Incoming\IncomingMessage;
-use BotMan\BotMan\Messages\Outgoing\OutgoingMessage;
 
 class DiscordDriver implements DriverInterface
 {
@@ -32,8 +32,9 @@ class DiscordDriver implements DriverInterface
 
     /**
      * Driver constructor.
-     * @param array $config
-     * @param Discord $client
+     *
+     * @param  array  $config
+     * @param  Discord  $client
      */
     public function __construct(array $config, Discord $client)
     {
@@ -82,7 +83,7 @@ class DiscordDriver implements DriverInterface
     }
 
     /**
-     * @param  IncomingMessage $message
+     * @param  IncomingMessage  $message
      * @return Answer
      */
     public function getConversationAnswer(IncomingMessage $message)
@@ -116,9 +117,9 @@ class DiscordDriver implements DriverInterface
     }
 
     /**
-     * @param string|\BotMan\BotMan\Messages\Outgoing\Question|IncomingMessage $message
-     * @param IncomingMessage $matchingMessage
-     * @param array $additionalParameters
+     * @param  string|\BotMan\BotMan\Messages\Outgoing\Question|IncomingMessage  $message
+     * @param  IncomingMessage  $matchingMessage
+     * @param  array  $additionalParameters
      * @return mixed
      */
     public function buildServicePayload($message, $matchingMessage, $additionalParameters = [])
@@ -133,7 +134,7 @@ class DiscordDriver implements DriverInterface
 
             $attachment = $message->getAttachment();
 
-            if (!is_null($attachment)) {
+            if (! is_null($attachment)) {
                 if ($attachment instanceof Image) {
                     $payload['embed'] = [
                         'image' => [
@@ -150,7 +151,7 @@ class DiscordDriver implements DriverInterface
     }
 
     /**
-     * @param mixed $payload
+     * @param  mixed  $payload
      * @return PromiseInterface
      */
     public function sendPayload($payload)
@@ -163,12 +164,13 @@ class DiscordDriver implements DriverInterface
      */
     public function isConfigured()
     {
-        return !is_null($this->config->get('token'));
+        return ! is_null($this->config->get('token'));
     }
 
     /**
      * Send a typing indicator.
-     * @param IncomingMessage $matchingMessage
+     *
+     * @param  IncomingMessage  $matchingMessage
      * @return mixed
      */
     public function types(IncomingMessage $matchingMessage)
@@ -177,9 +179,10 @@ class DiscordDriver implements DriverInterface
 
     /**
      * Send a typing indicator and wait for the given amount of seconds.
-     * @param IncomingMessage $matchingMessage
-     * @param int $seconds
-     * @param float $seconds
+     *
+     * @param  IncomingMessage  $matchingMessage
+     * @param  int  $seconds
+     * @param  float  $seconds
      * @return mixed
      */
     public function typesAndWaits(IncomingMessage $matchingMessage, float $seconds)
@@ -188,7 +191,8 @@ class DiscordDriver implements DriverInterface
 
     /**
      * Retrieve User information.
-     * @param IncomingMessage $matchingMessage
+     *
+     * @param  IncomingMessage  $matchingMessage
      * @return User
      */
     public function getUser(IncomingMessage $matchingMessage)
@@ -197,7 +201,7 @@ class DiscordDriver implements DriverInterface
         $this->client->getUserById($matchingMessage->getSender())->then(function ($_user) use (&$user) {
             $user = $_user;
         });
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             return new User(
                 $matchingMessage->getSender(),
                 $user->getFirstName(),
@@ -221,8 +225,8 @@ class DiscordDriver implements DriverInterface
      * Low-level method to perform driver specific API requests.
      *
      * @param $endpoint
-     * @param array $parameters
-     * @param IncomingMessage $matchingMessage
+     * @param  array  $parameters
+     * @param  IncomingMessage  $matchingMessage
      * @return \React\Promise\PromiseInterface
      */
     public function sendRequest($endpoint, array $parameters, IncomingMessage $matchingMessage)
